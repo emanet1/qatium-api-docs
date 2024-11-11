@@ -1,100 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qatium Ingest API Documentation</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qatium Ingest API Documentation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+    .content {
+        display: none;
+    }
+    .content.active {
+        display: block;
+    }
+    .toggle-button {
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    h1, h2, h3 {
+        color: #28a745;
+    }
+    ul, ol {
+        margin-left: 20px;
+    }
+    pre {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Qatium Ingest API Documentation</h1>
-    </header>
+<button class="toggle-button" onclick="toggleLanguage()">Switch to Spanish</button>
 
-    <main>
-        <section id="introduction">
-            <h2>Introduction</h2>
-            <p>Welcome to the Qatium Ingest API documentation! This API helps you add real-time data from your water network into Qatium. Once added, you can view, analyze, and simulate different scenarios to understand your network better.</p>
+<div id="content-english" class="content active">
+    <h1>Qatium Ingest API Documentation Improvements</h1>
+    <h2>Suggestions for Improving the Documentation</h2>
+    <h3>A. Simplify Technical Language</h3>
+    <ul>
+        <li><b>Current Language:</b> The documentation uses technical terms like "ingest," "token," "Bearer Token," and "ISO 8601" without explanations, which might confuse beginners.</li>
+        <li><b>Improvement:</b> Add brief definitions or explanations. For example:
             <ul>
-                <li><strong>Load data:</strong> Add readings from your own sources.</li>
-                <li><strong>Monitor status:</strong> Track data uploads.</li>
-                <li><strong>Test scenarios:</strong> Simulate effects on your network in a safe environment.</li>
+                <li>Token: "A token is like a password that lets you securely access the API. Qatium will provide you with this token."</li>
+                <li>ISO 8601: "ISO 8601 is a format for displaying date and time, like '2021-11-03T15:00:00Z'."</li>
             </ul>
-            <p>To get started, you’ll need an API token from Qatium, which you can enter in the "Authorize" section on the right. Use the interactive Swagger tool to test the API in real-time.</p>
-            <blockquote><strong>Note:</strong> If you use a real token, your actions will affect your actual data in the Qatium model.</blockquote>
-        </section>
-
-        <section id="headers">
-            <h2>Headers</h2>
+        </li>
+    </ul>
+    <h3>B. Add Visual Aids</h3>
+    <ul>
+        <li><b>Current Layout:</b> The Swagger tool on the right is interactive, but beginners might not understand how to use it.</li>
+        <li><b>Improvement:</b> Add a screenshot or a simple labeled image showing users where to find the "Authorize" button, test token, and how to make their first test request. This would guide users step-by-step.</li>
+    </ul>
+    <h3>C. Organize Information for Clarity</h3>
+    <ul>
+        <li><b>Headers Section:</b> The headers are important but could be organized in a clearer, bullet-point format for easy reading.</li>
+        <li><b>Improvement:</b> Separate "Authorization" and "Content-Type" into individual bullet points, each with examples, to make this information more accessible.</li>
+    </ul>
+    <h3>D. Provide Examples and Use Cases</h3>
+    <ul>
+        <li><b>Current Content:</b> The documentation explains the /ingest endpoint but lacks real examples of requests and responses.</li>
+        <li><b>Improvement:</b> Add sample code snippets to help users understand the expected format. For instance:
+            <pre>
+{
+  "time": "2021-11-03T15:00:00Z",
+  "asset": "Pipe1",
+  "metric": "flow",
+  "value": 1.7,
+  "unit": "l/s"
+}
+            </pre>
+        </li>
+        <li><b>Benefit:</b> This helps users understand the format needed for a successful API call.</li>
+    </ul>
+    <h3>E. Add Error Handling Tips</h3>
+    <ul>
+        <li><b>Current Content:</b> The status code section lacks explanations on what errors mean and how to resolve them.</li>
+        <li><b>Improvement:</b> Add brief explanations and troubleshooting tips for common errors. For example:
             <ul>
-                <li><strong>Authorization:</strong> You’ll need a token from Qatium. Add it in the Authorization header for every request as: <code>Authorization: Bearer YOUR_TOKEN_HERE</code></li>
-                <li><strong>Content-Type:</strong> Specify the format of your request:
-                    <ul>
-                        <li><code>application/json</code> for JSON data</li>
-                        <li><code>multipart/form-data</code> for form data</li>
-                    </ul>
-                </li>
+                <li>404 Not Found: "This error means the requested resource was not found. Check if the endpoint or 'job_id' is correct."</li>
             </ul>
-        </section>
+        </li>
+    </ul>
 
-        <section id="ingest-request">
-            <h2>Ingest Request</h2>
-            <p><strong>POST /ingest</strong></p>
-            <p>This endpoint allows you to upload readings (e.g., flow, pressure) to the model. It responds with the number of rows uploaded. For historical data uploads, please contact Qatium support.</p>
-            <pre><code>{
-    "time": "2021-11-03T15:00:00Z",
-    "asset": "Pipe1",
-    "metric": "flow",
-    "value": 1.7,
-    "unit": "l/s"
-}</code></pre>
-        </section>
+    <h2>Revised Documentation with Improvements</h2>
+    <h3>Introduction</h3>
+    <p>Welcome to the Qatium Ingest API documentation! This API helps you add real-time data from your water network into Qatium. Once added, you can view, analyze, and simulate different scenarios to understand your network better.</p>
+    <p>With the Ingest API, you can:</p>
+    <ul>
+        <li>Load data, such as pressure or flow readings, from your own sources directly into Qatium.</li>
+        <li>Monitor the status of the data you’ve uploaded.</li>
+        <li>Test how different scenarios might affect your network in a safe, virtual environment.</li>
+    </ul>
+    <p>To get started, you’ll need an API token from Qatium, which you can enter in the "Authorize" section on the right. We also provide a "Swagger" tool that lets you test the API in real-time. Don’t worry if you’re new to this – we’ll walk you through it step-by-step in the sections below!</p>
+    <p><b>Note:</b> If you use a real token, your actions will affect your actual data in the Qatium model.</p>
 
-        <section id="data-prep">
-            <h2>Prepare the Data</h2>
-            <p>Each reading should include these properties:</p>
+    <h3>Headers</h3>
+    <ul>
+        <li><b>Authorization:</b> You’ll need a token from Qatium to use the API. Add this token to the Authorization header for every request, like this:
+            <ul><li>Authorization: Bearer YOUR_TOKEN_HERE</li></ul>
+        </li>
+        <li><b>Content-Type:</b> The API supports multiple data formats. Specify the format of your request by setting the Content-Type header to one of the following:
             <ul>
-                <li><strong>time:</strong> ISO 8601 format (e.g., "2021-11-03T15:00:00Z")</li>
-                <li><strong>asset:</strong> Asset ID (e.g., "Pipe1")</li>
-                <li><strong>metric:</strong> Type of data measured (e.g., "flow")</li>
-                <li><strong>value:</strong> Reading value (e.g., 1.7)</li>
-                <li><strong>unit:</strong> Measurement unit (e.g., "l/s")</li>
+                <li>Content-Type: application/json for JSON data</li>
+                <li>Content-Type: multipart/form-data for form data</li>
             </ul>
-        </section>
+        </li>
+    </ul>
 
-        <section id="supported-formats">
-            <h2>Supported Formats</h2>
+    <h3>Prepare the Data</h3>
+    <p>Each reading needs to include the following properties for proper interpretation:</p>
+    <ul>
+        <li>time: The exact moment the reading was taken, in ISO 8601 format (e.g., "2021-11-03T15:00:00Z").</li>
+        <li>asset: The ID of the asset associated with the reading (e.g., "Pipe1").</li>
+        <li>metric: The type of data being measured (e.g., "flow").</li>
+        <li>value: The actual reading value (e.g., 1.7).</li>
+        <li>unit: The measurement unit (e.g., "l/s" for liters per second).</li>
+    </ul>
+    <p><b>Note:</b> Ensure that the value uses a dot as the decimal separator.</p>
+
+    <h3>Supported Formats</h3>
+    <ul>
+        <li>JSON Body: Up to 50 MB per request.</li>
+        <li>JSON File and CSV File: Files up to 1.5GB are supported, but headers are optional. If headers are missing, data must follow this order: "time","asset","metric","unit","value".</li>
+    </ul>
+
+    <h3>Endpoint Response</h3>
+    <p>When a data upload is successful, the response will include the status of the data in percentages, indicating whether it was processed successfully, quarantined, or is still pending.</p>
+    <pre>
+{
+  "status": {
+    "successful": 80,
+    "quarantined": 20,
+    "pending": 0
+  }
+}
+    </pre>
+    <p><b>Common Error Codes:</b></p>
+    <ul>
+        <li>200: Success</li>
+        <li>404: Not Found – Check if the endpoint or 'job_id' is correct.</li>
+        <li>429: Too Many Requests – You've hit the rate limit of 100 requests per minute.</li>
+    </ul>
+
+    <h3>Request Job Statuses</h3>
+    <p>Use GET /jobs/{jobId} to check the status of a data upload. Replace {jobId} with the actual job ID you receive in your initial request.</p>
+
+    <h3>FAQs</h3>
+    <ol>
+        <li>Can I retrieve, delete, or update data through the API?
+            <p>The Ingest API is an append-only API. If you need to delete data, please contact Qatium at q@qatium.com.</p>
+        </li>
+        <li>What happens if two values are submitted for the same asset with identical timestamps?
+            <p>The last value received will be used, and previous values will be ignored.</p>
+        </li>
+    </ol>
+</div>
+
+<div id="content-spanish" class="content">
+    <h1>Mejoras en la Documentación de la API de Ingesta de Qatium</h1>
+    <h2>Sugerencias para Mejorar la Documentación</h2>
+    <h3>A. Simplificar el Lenguaje Técnico</h3>
+    <ul>
+        <li><b>Lenguaje Actual:</b> La documentación usa términos técnicos como "ingesta," "token," "Token Bearer" y "ISO 8601" sin explicaciones, lo cual puede confundir a los principiantes.</li>
+        <li><b>Mejora:</b> Agregar definiciones o explicaciones breves.
             <ul>
-                <li><strong>JSON Body:</strong> Max 50 MB per request.</li>
-                <li><strong>JSON/CSV File:</strong> Max 1.5GB per file, headers optional. If headers are missing, use this order: <code>"time","asset","metric","unit","value"</code></li>
+                <li>Token: "Un token es como una contraseña que te permite acceder de forma segura a la API. Qatium te proporcionará este token."</li>
+                <li>ISO 8601: "ISO 8601 es un formato para mostrar fecha y hora, como '2021-11-03T15:00:00Z'."</li>
             </ul>
-        </section>
+        </li>
+    </ul>
+    <h3>B. Agregar Ayudas Visuales</h3>
+    <ul>
+        <li><b>Diseño Actual:</b> La herramienta Swagger en la derecha es interactiva, pero los principiantes pueden no entender cómo usarla.</li>
+        <li><b>Mejora:</b> Agregar una captura de pantalla o una imagen simple etiquetada que muestre a los usuarios dónde encontrar el botón "Authorize," el token de prueba, y cómo realizar su primera solicitud de prueba. Esto guiaría a los usuarios paso a paso.</li>
+    </ul>
+    <h3>C. Organizar la Información para Mayor Claridad</h3>
+    <ul>
+        <li><b>Sección de Encabezados:</b> Los encabezados son importantes pero podrían organizarse en un formato de viñetas más claro para una lectura fácil.</li>
+        <li><b>Mejora:</b> Separar "Authorization" y "Content-Type" en puntos individuales, cada uno con ejemplos, para hacer esta información más accesible.</li>
+    </ul>
+    <h3>D. Proporcionar Ejemplos y Casos de Uso</h3>
+    <ul>
+        <li><b>Contenido Actual:</b> La documentación explica el punto de acceso /ingest pero carece de ejemplos reales de solicitudes y respuestas.</li>
+        <li><b>Mejora:</b> Agregar fragmentos de código de ejemplo para ayudar a los usuarios a entender el formato esperado. Por ejemplo:
+            <pre>
+{
+  "time": "2021-11-03T15:00:00Z",
+  "asset": "Pipe1",
+  "metric": "flow",
+  "value": 1.7,
+  "unit": "l/s"
+}
+            </pre>
+        </li>
+        <li><b>Beneficio:</b> Esto ayuda a los usuarios a entender el formato necesario para una llamada de API exitosa.</li>
+    </ul>
+    <h3>E. Agregar Consejos para Manejo de Errores</h3>
+    <ul>
+        <li><b>Contenido Actual:</b> La sección de códigos de estado carece de explicaciones sobre lo que significan los errores y cómo resolverlos.</li>
+        <li><b>Mejora:</b> Agregar explicaciones breves y consejos para la resolución de problemas en errores comunes. Por ejemplo:
+            <ul>
+                <li>404 No Encontrado: "Este error significa que el recurso solicitado no fue encontrado. Verifica si el punto de acceso o 'job_id' es correcto."</li>
+            </ul>
+        </li>
+    </ul>
 
-        <section id="endpoint-response">
-            <h2>Endpoint Response</h2>
-            <p>Successful data uploads include the status in percentages:</p>
-            <pre><code>{
-    "status": {
-        "successful": 80,
-        "quarantined": 20,
-        "pending": 0
+    <h2>Documentación Revisada con Mejoras</h2>
+    <h3>Introducción</h3>
+    <p>¡Bienvenido a la documentación de la API de Ingesta de Qatium! Esta API te ayuda a agregar datos en tiempo real desde tu red de agua a Qatium. Una vez agregados, puedes ver, analizar y simular diferentes escenarios para comprender mejor tu red.</p>
+    <p>Con la API de Ingesta, puedes:</p>
+    <ul>
+        <li>Cargar datos, como lecturas de presión o flujo, desde tus propias fuentes directamente en Qatium.</li>
+        <li>Monitorear el estado de los datos que has subido.</li>
+        <li>Probar cómo diferentes escenarios pueden afectar tu red en un entorno seguro y virtual.</li>
+    </ul>
+    <p>Para comenzar, necesitarás un token de API proporcionado por Qatium, que puedes ingresar en la sección "Authorize" a la derecha. También ofrecemos una herramienta "Swagger" que te permite probar la API en tiempo real. No te preocupes si eres nuevo en esto – ¡te guiaremos paso a paso en las secciones a continuación!</p>
+    <p><b>Nota:</b> Si utilizas un token real, tus acciones afectarán tus datos reales en el modelo de Qatium.</p>
+
+    <h3>Encabezados</h3>
+    <ul>
+        <li><b>Autorización:</b> Necesitarás un token de Qatium para usar la API. Agrega este token al encabezado Authorization para cada solicitud, de la siguiente manera:
+            <ul><li>Authorization: Bearer TU_TOKEN_AQUÍ</li></ul>
+        </li>
+        <li><b>Content-Type:</b> La API admite varios formatos de datos. Especifica el formato de tu solicitud configurando el encabezado Content-Type a una de las siguientes opciones:
+            <ul>
+                <li>Content-Type: application/json para datos JSON</li>
+                <li>Content-Type: multipart/form-data para datos de formulario</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Preparar los Datos</h3>
+    <p>Cada lectura necesita incluir las siguientes propiedades para una interpretación adecuada:</p>
+    <ul>
+        <li>time: El momento exacto en que se tomó la lectura, en formato ISO 8601 (por ejemplo, "2021-11-03T15:00:00Z").</li>
+        <li>asset: El ID del activo asociado con la lectura (por ejemplo, "Pipe1").</li>
+        <li>metric: El tipo de dato que se está midiendo (por ejemplo, "flow").</li>
+        <li>value: El valor real de la lectura (por ejemplo, 1.7).</li>
+        <li>unit: La unidad de medida (por ejemplo, "l/s" para litros por segundo).</li>
+    </ul>
+    <p><b>Nota:</b> Asegúrate de que el valor use un punto como separador decimal.</p>
+
+    <h3>Formatos Soportados</h3>
+    <ul>
+        <li>Cuerpo JSON: Hasta 50 MB por solicitud.</li>
+        <li>Archivo JSON y Archivo CSV: Archivos de hasta 1.5GB son soportados, pero los encabezados son opcionales. Si faltan los encabezados, los datos deben seguir este orden: "time","asset","metric","unit","value".</li>
+    </ul>
+
+    <h3>Respuesta del Endpoint</h3>
+    <p>Cuando una carga de datos es exitosa, la respuesta incluirá el estado de los datos en porcentajes, indicando si fueron procesados con éxito, puestos en cuarentena o si están pendientes.</p>
+    <pre>
+{
+  "status": {
+    "successful": 80,
+    "quarantined": 20,
+    "pending": 0
+  }
+}
+    </pre>
+    <p><b>Códigos de Error Comunes:</b></p>
+    <ul>
+        <li>200: Éxito</li>
+        <li>404: No Encontrado – Verifica si el punto de acceso o 'job_id' es correcto.</li>
+        <li>429: Demasiadas Solicitudes – Has alcanzado el límite de 100 solicitudes por minuto.</li>
+    </ul>
+
+    <h3>Solicitudes de Estado de Trabajo</h3>
+    <p>Usa GET /jobs/{jobId} para verificar el estado de una carga de datos. Reemplaza {jobId} con el ID de trabajo real que recibes en tu solicitud inicial.</p>
+
+    <h3>Preguntas Frecuentes</h3>
+    <ol>
+        <li>¿Puedo recuperar, eliminar o actualizar datos a través de la API?
+            <p>La API de Ingesta es una API de solo adición. Si necesitas eliminar datos, contacta a Qatium en q@qatium.com.</p>
+        </li>
+        <li>¿Qué sucede si se envían dos valores para el mismo activo con marcas de tiempo idénticas?
+            <p>Se usará el último valor recibido, y los valores anteriores serán ignorados.</p>
+        </li>
+    </ol>
+</div>
+
+<script>
+    function toggleLanguage() {
+        const englishContent = document.getElementById('content-english');
+        const spanishContent = document.getElementById('content-spanish');
+        const button = document.querySelector('.toggle-button');
+
+        if (englishContent.classList.contains('active')) {
+            englishContent.classList.remove('active');
+            spanishContent.classList.add('active');
+            button.textContent = "Switch to English";
+        } else {
+            englishContent.classList.add('active');
+            spanishContent.classList.remove('active');
+            button.textContent = "Switch to Spanish";
+        }
     }
-}</code></pre>
-        </section>
-
-        <section id="faqs">
-            <h2>FAQs</h2>
-            <p><strong>1. Can I retrieve, delete, or update data through the API?</strong></p>
-            <p>The Ingest API is append-only. To delete data, contact Qatium at <a href="mailto:q@qatium.com">q@qatium.com</a>.</p>
-            <p><strong>2. What happens if two values are submitted for the same asset with identical timestamps?</strong></p>
-            <p>The last received value is used; previous values are ignored.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Qatium Ingest API Documentation</p>
-    </footer>
+</script>
 
 </body>
 </html>
