@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qatium Ingest API Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Qatium Ingest API Documentation</h1>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Welcome to the Qatium Ingest API documentation! This API helps you add real-time data from your water network into Qatium. Once added, you can view, analyze, and simulate different scenarios to understand your network better.</p>
+            <ul>
+                <li><strong>Load data:</strong> Add readings from your own sources.</li>
+                <li><strong>Monitor status:</strong> Track data uploads.</li>
+                <li><strong>Test scenarios:</strong> Simulate effects on your network in a safe environment.</li>
+            </ul>
+            <p>To get started, you’ll need an API token from Qatium, which you can enter in the "Authorize" section on the right. Use the interactive Swagger tool to test the API in real-time.</p>
+            <blockquote><strong>Note:</strong> If you use a real token, your actions will affect your actual data in the Qatium model.</blockquote>
+        </section>
+
+        <section id="headers">
+            <h2>Headers</h2>
+            <ul>
+                <li><strong>Authorization:</strong> You’ll need a token from Qatium. Add it in the Authorization header for every request as: <code>Authorization: Bearer YOUR_TOKEN_HERE</code></li>
+                <li><strong>Content-Type:</strong> Specify the format of your request:
+                    <ul>
+                        <li><code>application/json</code> for JSON data</li>
+                        <li><code>multipart/form-data</code> for form data</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="ingest-request">
+            <h2>Ingest Request</h2>
+            <p><strong>POST /ingest</strong></p>
+            <p>This endpoint allows you to upload readings (e.g., flow, pressure) to the model. It responds with the number of rows uploaded. For historical data uploads, please contact Qatium support.</p>
+            <pre><code>{
+    "time": "2021-11-03T15:00:00Z",
+    "asset": "Pipe1",
+    "metric": "flow",
+    "value": 1.7,
+    "unit": "l/s"
+}</code></pre>
+        </section>
+
+        <section id="data-prep">
+            <h2>Prepare the Data</h2>
+            <p>Each reading should include these properties:</p>
+            <ul>
+                <li><strong>time:</strong> ISO 8601 format (e.g., "2021-11-03T15:00:00Z")</li>
+                <li><strong>asset:</strong> Asset ID (e.g., "Pipe1")</li>
+                <li><strong>metric:</strong> Type of data measured (e.g., "flow")</li>
+                <li><strong>value:</strong> Reading value (e.g., 1.7)</li>
+                <li><strong>unit:</strong> Measurement unit (e.g., "l/s")</li>
+            </ul>
+        </section>
+
+        <section id="supported-formats">
+            <h2>Supported Formats</h2>
+            <ul>
+                <li><strong>JSON Body:</strong> Max 50 MB per request.</li>
+                <li><strong>JSON/CSV File:</strong> Max 1.5GB per file, headers optional. If headers are missing, use this order: <code>"time","asset","metric","unit","value"</code></li>
+            </ul>
+        </section>
+
+        <section id="endpoint-response">
+            <h2>Endpoint Response</h2>
+            <p>Successful data uploads include the status in percentages:</p>
+            <pre><code>{
+    "status": {
+        "successful": 80,
+        "quarantined": 20,
+        "pending": 0
+    }
+}</code></pre>
+        </section>
+
+        <section id="faqs">
+            <h2>FAQs</h2>
+            <p><strong>1. Can I retrieve, delete, or update data through the API?</strong></p>
+            <p>The Ingest API is append-only. To delete data, contact Qatium at <a href="mailto:q@qatium.com">q@qatium.com</a>.</p>
+            <p><strong>2. What happens if two values are submitted for the same asset with identical timestamps?</strong></p>
+            <p>The last received value is used; previous values are ignored.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Qatium Ingest API Documentation</p>
+    </footer>
+
+</body>
+</html>
